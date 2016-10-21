@@ -28,8 +28,9 @@
     <div class="col-sm-8">
     </div>
     <div class="col-sm-4">
-      <label class="btn btn-default btn-file" background-color=#4CAF50 onchange="openFile(event)">
-      Load Image <input type="file" style="display: none;">
+      <label id="load-btn" class="btn btn-default btn-file" onchange="openFile(event)">
+        Load Image <input type="file" style="display: none;">
+        </label>
       </label>
     </div>
   </div>
@@ -123,7 +124,7 @@ img.addEventListener('load', function() {
     while (colorDisplay.hasChildNodes()) {
       colorDisplay.removeChild(colorDisplay.lastChild)
     }
-    
+
     for( var swatch in swatches) {
       if (swatches.hasOwnProperty(swatch) && swatches[swatch]) {
         //var color = colorDisplay.appendChild(document.createElement(swatch))
