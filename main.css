@@ -1,5 +1,16 @@
-.columns {
-  -webkit-column-count: 5
-  -moz-column-count: 5
-  column-count: 5
+#imageDisplay {
+	position: fixed;
+	left: 0px
+}
+
+#colorDisplay {
+	position: fixed;
+	top: 0px;
+	left: 600px;
+	width: 50%;
+	height: 50%;
+}
+
+input[type=file] {
+	display: none;
 }

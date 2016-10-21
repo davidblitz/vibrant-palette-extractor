@@ -1,14 +1,67 @@
+<!DOCTYPE html>
 <html>
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <meta charset="utf-8">
-<script src="Vibrant.min.js"></script>
-<script src="svg.js"></script>
+<!-- Start bootstrap -->
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+<!-- jQuery library -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+
+<!-- Latest compiled JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<!--end bootstrap-->
+
+<script src="lib/Vibrant.min.js"></script>
+<script src="lib/svg.js"></script>
 <body>
-  <div id="colorDisplay" class="columns"></div>
+  <div class="row">
+    <div class="col-sm-8">
+    <div id="imageDisplay"></div>
+    </div>
+    <div class="col-sm-4">
+      <div id="colorDisplay"></div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-sm-8">
+    </div>
+    <div class="col-sm-4">
+      <label class="btn btn-default btn-file" background-color=#4CAF50 onchange="openFile(event)">
+      Load Image <input type="file" style="display: none;">
+      </label>
+    </div>
+  </div>
+
+
 </body>
 <script>
-
 var img = document.createElement('img');
-img.setAttribute('src', 'analyze.jpg')
+img.setAttribute('src', 'img/analyze.jpg')
+
+var openFile = function(event) {
+  var input = event.target;
+  var file    = input.files[0]; //sames as here
+  var reader  = new FileReader();
+
+  reader.onloadend = function () {
+    img.src = reader.result;
+  }
+
+  if (file) {
+    reader.readAsDataURL(file); //reads the data as a URL
+  } else {
+    img.src = "img/analyze.jpg";
+  }
+};
+
+
+img.width = 600
+img.height = 400
+
+var imageDisplay = document.getElementById('imageDisplay')
+                          .appendChild(img)
 
 img.addEventListener('load', function() {
     var vibrant = new Vibrant(img, 128, 5);
@@ -67,16 +120,23 @@ img.addEventListener('load', function() {
     var colorInd = 0
     var xStep = 200
     var colorDisplay = document.getElementById("colorDisplay")
-    var text = colorDisplay.appendChild(document.createElement('div'))
-    var display = colorDisplay.appendChild(document.createElement('div'))
-    display.width = 5*xStep
-    display.height = 50 + 10
-    var draw = SVG(display)
+    while (colorDisplay.hasChildNodes()) {
+      colorDisplay.removeChild(colorDisplay.lastChild)
+    }
+    
     for( var swatch in swatches) {
       if (swatches.hasOwnProperty(swatch) && swatches[swatch]) {
         //var color = colorDisplay.appendChild(document.createElement(swatch))
+        var text = document.createElement('div')
+        text.class = "row"
+        colorDisplay.appendChild(text)
+        var display = document.createElement('div')
+        display.class = "row"
+        colorDisplay.appendChild(display)
         text.innerHTML = text.innerHTML + swatch + ": " + swatches[swatch].getHex() + " "
-        draw.rect(50, 50).fill(swatches[swatch].getHex()).move(xStep*colorInd, 0)
+
+        var draw = SVG(display).size(70, 70)
+        draw.rect(50, 50).fill(swatches[swatch].getHex()).move(10, 10)
         colorInd += 1
       }
     }
