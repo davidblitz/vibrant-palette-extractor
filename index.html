@@ -26,6 +26,9 @@
   </div>
   <div class="row">
     <div class="col-sm-8">
+      Note that all pictures you load, are only processed in your browser, i.e. on your device.<br>
+      If you want to be 100% sure, you can also get the source by clicking below and <br>
+      run it locally by opening <code>index.html</code> in your browser.<br>
       <a href="https://github.com/davidblitz/vibrant-color-extractor">More Info and Source</a>
     </div>
     <div class="col-sm-4">
@@ -73,51 +76,7 @@ img.addEventListener('load', function() {
           console.log(swatch, swatches[swatch].getRgb())
         }
     }
-    /*
-    var img2 = new Image();
-    img2.setAttribute('src', 'example.jpg')
-    var canvas = document.getElementById('canvas')
-    var context = canvas.getContext('2d')
-    canvas.width = 400
-    canvas.height = 300
-    context.drawImage(img2, 0, 0, canvas.width, canvas.height)
-    imageData = context.getImageData(0, 0, canvas.width, canvas.height)
-    pixels = imageData.data
-    console.log(pixels.length)
 
-    function euclidean(rgb1, rgb2) {
-      return Math.sqrt(Math.pow(rgb1[0] - rgb2[0], 2) + Math.pow(rgb1[1] - rgb2[1], 2) + Math.pow(rgb1[2] - rgb2[2], 2))
-    }
-
-    function closestSwatch(rgb) {
-      var closest = []
-      var mn = 1000*1000
-      for( var swatch in swatches) {
-        if (swatches.hasOwnProperty(swatch) && swatches[swatch]) {
-          var swatch_rgb = swatches[swatch].getRgb()
-          var dist = euclidean(swatch_rgb, rgb)
-          if(dist < mn) {
-            closest = swatch
-            mn = dist
-          }
-        }
-      }
-
-      return closest
-    }
-
-    for(var i=0; i<pixels.length; i += 4) {
-      var rgb = [pixels[i], pixels[i+1], pixels[i+2]]
-
-      var newRgb = swatches[closestSwatch(rgb)].getRgb()
-
-      imageData.data[i] = newRgb[0]
-      imageData.data[i+1] = newRgb[1]
-      imageData.data[i+2] = newRgb[2]
-    }
-
-    context.putImageData(imageData, 0, 0)
-    */
     //display prominent colors
     var colorInd = 0
     var xStep = 200
